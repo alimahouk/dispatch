@@ -1,0 +1,56 @@
+DIRECTORY STRUCTURE
+
+📁 ~
+└───────┐
+	├📁 .dispatch
+	│	└───────┐
+	│		├📄 dp.conf (daemon config file)
+	│		├📄 dp.log (error log)
+	│		└📄 dp.rules (black/whitelisted addresses)
+DEPTH 0	└📁 Dispatch
+		└───────┐
+			├📄 About.txt (contains 1 line which will be used as my display name)
+			├📄 id.pem (the local machine's private key)
+			├📄 Instructions.txt (the readme)
+			├📁 localhost (default domain that maps to the local machine)
+		DEPTH 1	└📁 mydomain_1
+				└───────┐
+					├📄 .pubkey (my server's public key)
+				DEPTH 2	├📁 myuser_1
+					│	└───────┐
+					│		├📄 .pubkey (my public key)
+					│		├📄 auto.xyz (This file (with any extension) can be sent as an automatic response to new parcels)
+					│		├📄 dp.forward (auto-forwards new parcels to addresses in this file; can be made more specific by being placed in deeper directories)
+					│	DEPTH 3	└📁 recipientdomain_1
+					│			└───────┐
+					│				├📄 .pubkey (the recipient server's public key)
+					│			DEPTH 4	├📁 recipientuser_1
+					│				│	└───────┐
+					│				│		├📄 .log (contains event log for this user)
+					│				│		├📄 .index (contains checksums of files in this directory)
+					│				│		├📄 .pubkey (the recipient user's public key)
+					│				│		├📄 Quarterly Report.pdf
+					│				│	DEPTH 5	└📁 My Project
+					│				│			└───────┐
+					│				│				└📄 Another document.docx
+					│				└📁 mybroadcastlist_1
+					│					└───────┐
+					│						├📄 .log (contains event log for this list)
+					│						├📄 .index (contains checksums of files in this directory)
+					│						└📄 dp.list (a list of addresses; when placed at this level acts as a broadcast list)
+					└📁 mymailinglist_1
+						└───────┐
+							├📄 .log (contains event log for this list)
+							├📄 .index (contains checksums of files in this directory)
+							└📄 dp.list (a list of addresses; when placed at this level acts as a mailing list)
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+* File extensions represent services.
+	* Interested listeners get notified
+* Scheduling
+* Hooks
+	* Can be used by bots or other apps.
+	* Text-based protocol over TCP.
+	* Client/Server daemon notifies listeners of certain events, such as a parcel arriving or a parcel being opened.
+* Direct Domain Dispatch
+	* Send messages to a domain without specifying a user.
+* IP address dispatch
